@@ -8,7 +8,7 @@ function Layout({ children }) {
       <Container fluid>
         <Head>
           <title>Ticmas</title>
-          <link rel="icon" href="favico-ticmas.ico" />
+          
         </Head>
         {children}
         <Footer></Footer>

@@ -24,6 +24,39 @@ export default function Courses({ courses, user }) {
   const [alert, setAlert] = useState(false);
   const handleCloseAlert = () => setAlert(false);
   const handleShowAlert = () => setAlert(true);
+  if(user=='noUser'){
+    return(
+      <div className={styles.container}>
+      <Layout>
+        <NavBar Navigation>
+          <Nav.Link style={{ color: "darkviolet" }} href="/">
+            Salir
+          </Nav.Link>
+        </NavBar>
+        <div style={{ marginTop: "12vh", fontFamily: "Roboto", marginLeft:'0', marginRight:'0' }}>
+          <Jumbotron className="bg-white">
+            <h1>No estas logeado</h1>
+            <p>
+              <Button
+                variant="success"
+                style={{
+                  backgroundColor: "darkviolet",
+                  border: "darkviolet",
+                  borderRadius: "50px",
+                  width: "250px",
+                }}
+                href='/login'
+              >
+                Login
+              </Button>
+            </p>
+           
+          </Jumbotron>
+        </div>
+      </Layout>
+    </div>
+    )
+  }
   return (
     <div className={styles.container}>
       <Layout>
@@ -35,6 +68,7 @@ export default function Courses({ courses, user }) {
         <div style={{ marginTop: "12vh", fontFamily: "Roboto" }}>
           <Jumbotron className="bg-white">
             <h1>Bienvenido a TICMAS</h1>
+            <AuthenticUser user={user}/>
             <Row className="justify-content">
               <Col>
                 <h5>{user}</h5>
@@ -212,7 +246,7 @@ export async function getStaticProps() {
       Authorization: `Bearer ` + axios.defaults.headers.common.Authorization,
     },
   });
-
+  console.log('esto es course',courses)
   return {
     props: {
       courses: courses.data.courses,
