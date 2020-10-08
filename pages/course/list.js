@@ -24,7 +24,7 @@ Courses.getInitialProps = async () => {
   });
   console.log(courses.config.headers.Authorization)
   return {
-    header:courses.config.headers.Authorization,
+    header:courses.config.headers.,
     courses: courses.data.courses,
     user: courses.data.user,
   };
@@ -38,7 +38,7 @@ export default function Courses(props) {
   const [alert, setAlert] = useState(false);
   const handleCloseAlert = () => setAlert(false);
   const handleShowAlert = () => setAlert(true);
-  console.log(props)
+  
   if (props.user == "noUser") {
     return (
       <div className={styles.container}>
@@ -59,7 +59,6 @@ export default function Courses(props) {
             <Jumbotron className="bg-white">
               <h1>No estas logeado</h1>
               <h3>{props.user}</h3>
-              <h3>{props.header}</h3>
               <p>
                 <Button
                   variant="success"
@@ -94,7 +93,6 @@ export default function Courses(props) {
             <Row className="justify-content">
               <Col>
                 <h5>{props.user}</h5>
-                <h3>{props.header}</h3>
               </Col>
             </Row>
             <p>
