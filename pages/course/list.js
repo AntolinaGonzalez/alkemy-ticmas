@@ -37,6 +37,7 @@ export default function Courses({ courses, user }) {
         <div style={{ marginTop: "12vh", fontFamily: "Roboto", marginLeft:'0', marginRight:'0' }}>
           <Jumbotron className="bg-white">
             <h1>No estas logeado</h1>
+            <h3>{user}</h3>
             <p>
               <Button
                 variant="success"
