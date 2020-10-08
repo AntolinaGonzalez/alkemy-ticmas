@@ -37,46 +37,6 @@ export default function Courses(props) {
   const handleCloseAlert = () => setAlert(false);
   const handleShowAlert = () => setAlert(true);
   
-  // if (props.user == "noUser") {
-  //   return (
-  //     <div className={styles.container}>
-  //       <Layout>
-  //         <NavBar Navigation>
-  //           <Nav.Link style={{ color: "darkviolet" }} href="/">
-  //             Salir
-  //           </Nav.Link>
-  //         </NavBar>
-  //         <div
-  //           style={{
-  //             marginTop: "12vh",
-  //             fontFamily: "Roboto",
-  //             marginLeft: "0",
-  //             marginRight: "0",
-  //           }}
-  //         >
-  //           <Jumbotron className="bg-white">
-  //             <h1>No estas logeado</h1>
-  //             <h3>{props.user}</h3>
-  //             <p>
-  //               <Button
-  //                 variant="success"
-  //                 style={{
-  //                   backgroundColor: "darkviolet",
-  //                   border: "darkviolet",
-  //                   borderRadius: "50px",
-  //                   width: "250px",
-  //                 }}
-  //                 href="/"
-  //               >
-  //                 Login
-  //               </Button>
-  //             </p>
-  //           </Jumbotron>
-  //         </div>
-  //       </Layout>
-  //     </div>
-  //   );
-  // }
   return (
     <div className={styles.container}>
       <Layout>
