@@ -9,7 +9,7 @@ module.exports = {
         return config
     },
     env : {
-        API_BASE_URL : process.env.API_BASE_URL || "http://localhost:5000"
+        API_BASE_URL : process.env.API_BASE_URL || "https://ticmas-backend.herokuapp.com"
     }
 
 }
