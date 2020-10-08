@@ -16,7 +16,19 @@ import Layout from "../../components/layout";
 import styles from "../../styles/Home.module.css";
 import React, { useState } from "react";
 
-export default function Courses({ courses, user }) {
+Courses.getInitialProps = async () => {
+  const courses = await axios.get(`${process.env.API_BASE_URL}/courses`, {
+    headers: {
+      Authorization: `Bearer ` + axios.defaults.headers.common.Authorization,
+    },
+  });
+  return {
+    courses: [],
+    user: courses.data.user,
+  };
+};
+
+export default function Courses(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -24,40 +36,46 @@ export default function Courses({ courses, user }) {
   const [alert, setAlert] = useState(false);
   const handleCloseAlert = () => setAlert(false);
   const handleShowAlert = () => setAlert(true);
-
-  if(user=='noUser'){
-    return(
+  
+  if (props.user == "noUser") {
+    return (
       <div className={styles.container}>
-      <Layout>
-        <NavBar Navigation>
-          <Nav.Link style={{ color: "darkviolet" }} href="/">
-            Salir
-          </Nav.Link>
-        </NavBar>
-        <div style={{ marginTop: "12vh", fontFamily: "Roboto", marginLeft:'0', marginRight:'0' }}>
-          <Jumbotron className="bg-white">
-            <h1>No estas logeado</h1>
-            <h3>{user}</h3>
-            <p>
-              <Button
-                variant="success"
-                style={{
-                  backgroundColor: "darkviolet",
-                  border: "darkviolet",
-                  borderRadius: "50px",
-                  width: "250px",
-                }}
-                href='/'
-              >
-                Login
-              </Button>
-            </p>
-           
-          </Jumbotron>
-        </div>
-      </Layout>
-    </div>
-    )
+        <Layout>
+          <NavBar Navigation>
+            <Nav.Link style={{ color: "darkviolet" }} href="/">
+              Salir
+            </Nav.Link>
+          </NavBar>
+          <div
+            style={{
+              marginTop: "12vh",
+              fontFamily: "Roboto",
+              marginLeft: "0",
+              marginRight: "0",
+            }}
+          >
+            <Jumbotron className="bg-white">
+              <h1>No estas logeado</h1>
+              <h3>{props.user}</h3>
+              <p>
+                <Button
+                  variant="success"
+                  style={{
+                    backgroundColor: "darkviolet",
+                    border: "darkviolet",
+                    borderRadius: "50px",
+                    width: "250px",
+                  }}
+                  href="/"
+                >
+                  Login
+                </Button>
+              </p>
+            </Jumbotron>
+          </div>
+        </Layout>
+      </div>
+    );
   }
   return (
     <div className={styles.container}>
@@ -72,7 +90,7 @@ export default function Courses({ courses, user }) {
             <h1>Bienvenido a TICMAS</h1>
             <Row className="justify-content">
               <Col>
-                <h5>{user}</h5>
+                <h5>{props.user}</h5>
               </Col>
             </Row>
             <p>
@@ -147,7 +165,7 @@ export default function Courses({ courses, user }) {
             </Modal>
           </Jumbotron>
           <Row xs={1} md={3}>
-            {courses.map((course) => (
+            {props.courses.map((course) => (
               <Col className="px-2 mt-1">
                 <ListGroup.Item
                   variant="success"
@@ -239,18 +257,4 @@ export default function Courses({ courses, user }) {
       </Layout>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const courses = await axios.get(`${process.env.API_BASE_URL}/courses`, {
-    headers: {
-      Authorization: `Bearer ` + axios.defaults.headers.common.Authorization,
-    },
-  });
-  return {
-    props: {
-      courses: courses.data.courses,
-      user: courses.data.user,
-    },
-  };
 }
