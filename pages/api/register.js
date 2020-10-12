@@ -8,21 +8,7 @@ export default (req, res) => {
     data: body,
   })
     .then(function (response) {
-      axios({
-        method: "post",
-        url: `${process.env.API_BASE_URL}/users/login`,
-        data: body,
-      })
-        .then(function (response) {
-          axios.defaults.headers.common["Authorization"] =
-            response.data.accessToken;
-            res.redirect("../course/list");
-        })
-        .catch(function (error) {
-          if (error.response.status === 401) {
-            res.redirect("../error");
-          }
-        });
+      res.redirect(`../list/${response.data.user._id}`);
     })
     .catch(function (error) {
       if (error.response.data.statusCode === 409) {
