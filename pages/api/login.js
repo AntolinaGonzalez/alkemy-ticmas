@@ -1,23 +1,20 @@
 import axios from "axios";
-import { setToken } from "./Helpers/auth-Helpers";
 
-export default async (req, res) => {
+export default (req, res) => {
   const body = req.query;
-  const { data } = await axios.post(`${process.env.API_BASE_URL}/users/login`, {
-    email: body.email,
-    password: body.password,
-  });
-  setToken(data.accessToken)
-  res.redirect("../course/list")
-  // .then(function (response) {
-  //   //setToken(response.data.accessToken)
-  //   axios.defaults.headers.common["Authorization"] =
-  //     response.data.accessToken;
-  //     res.redirect("../course/list");
-  // })
-  // .catch(function (error) {
-  //   if (error.response.status === 401) {
-  //     res.redirect("../error");
-  //   }
-  // });
+  console.log('el body',body)
+  axios({
+    method: "get",
+    url: `${process.env.API_BASE_URL}/users`,
+    data: body,
+  })
+    .then(function (response) {
+      console.log('response login',response.data);
+      res.redirect(`../list/${response.data._id}`);
+    })
+    .catch(function (error) {
+      if (error.response.status === 401) {
+        res.redirect("../error");
+      }
+    });
 };

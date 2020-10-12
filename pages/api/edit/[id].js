@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Form } from "react-bootstrap";
 
 export default (req, res) => {
     const body = req.query
@@ -12,6 +11,6 @@ export default (req, res) => {
     }
   }).then(function (response){
     
-    res.redirect("../../course/list")
+    res.redirect(`/list/${req.query.ct}`)
   })
   };
