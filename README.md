@@ -28,3 +28,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# Explanation
+
+This project was made in AlkemyLabs
+
+It is about a platform where you can create courses and manage them
+
+Now you can visit https://ticmas.vercel.app/
+
+Next Steps: The authentication does not work, you can check all the functionalities on the web page but you send the client information from the frontend. I want to correct this and make the page secure
+
+I am implementing in the backend (https://github.com/AntolinaGonzalez/alkemy-ticmas-backend) jwtauthentication, it works but I was not able to find the way to store the accessToken in the frontend but I am still looking for an answer
