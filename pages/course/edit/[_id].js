@@ -7,8 +7,9 @@ import axios from "axios";
 
 EditCourse.getInitialProps = async ({ query }) => {
   let id = query._id;
+  let ct=query.ct
   let course = await axios.get(`${process.env.API_BASE_URL}/courses/${id}`);
-  return { id, course: course.data };
+  return { id, ct,course: course.data };
 };
 
 function EditCourse(props) {
@@ -47,6 +48,12 @@ function EditCourse(props) {
                           name="title"
                           defaultValue={props.course.title}
                           required
+                        />
+                        <Form.Control
+                          name="title"
+                          value={props.ct}
+                          hidden
+                          name="ct"
                         />
                       </Form.Group>
                       <Form.Group controlId="formGridDescription" >
