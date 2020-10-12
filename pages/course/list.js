@@ -28,6 +28,7 @@ Courses.getInitialProps = async (req,res) => {
   });
   
   return {
+    data: token,
     courses: courses.data.courses,
     user: courses.data.user,
   };
@@ -61,7 +62,7 @@ export default function Courses(props) {
             <Jumbotron className="bg-white">
               <h1>No estas logeado</h1>
               <h3>{props.user}</h3>
-              
+              <h3>{props.data}</h3>
               <p>
                 <Button
                   variant="success"
