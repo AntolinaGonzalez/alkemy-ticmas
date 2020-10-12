@@ -17,21 +17,17 @@ import styles from "../../styles/Home.module.css";
 import React, { useState } from "react";
 import nextCookie from 'next-cookies';
 import Cookies from 'js-cookie';
-
-Courses.getInitialProps = async () => {
-  const token = await axios.post(`${process.env.API_BASE_URL}/users/login`, {
-    email: 'antolina487@gmail.com',
-    password:'jejej4'
-  })
-  console.log(token.data.accessToken)
+import {getToken} from '../api/Helpers/auth-Helpers'
+Courses.getInitialProps = async (req,res) => {
+  const token = getToken()
+  console.log(token)
   const courses = await axios.get(`${process.env.API_BASE_URL}/courses`, {
     headers: {
-      Authorization: `Bearer ` + axios.defaults.headers.common.Authorization,
+      Authorization: `Bearer ` + token,
     },
   });
-  //console.log(courses.config.headers.Authorization)
+  
   return {
-    data: token.data.accessToken,
     courses: courses.data.courses,
     user: courses.data.user,
   };
@@ -65,7 +61,7 @@ export default function Courses(props) {
             <Jumbotron className="bg-white">
               <h1>No estas logeado</h1>
               <h3>{props.user}</h3>
-              <h3>{props.data}</h3>
+              
               <p>
                 <Button
                   variant="success"
